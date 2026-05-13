@@ -6,13 +6,6 @@ import bcrypt from "bcrypt";
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
 const prisma = new PrismaClient({ adapter });
 
-const DEMO_ACCOUNTS = [
-    { name: "Alice Martin",  email: "alice@movietreasures.com",  password: "alice123" },
-    { name: "Bob Dupont",    email: "bob@movietreasures.com",    password: "bob123" },
-    { name: "Carol Schmidt", email: "carol@movietreasures.com",  password: "carol123" },
-    { name: "Admin",         email: "admin@movietreasures.com",  password: "admin123" },
-];
-
 const DEMO_MOVIES = [
     { title: "Inception", description: "Un voleur s'infiltre dans les rêves pour dérober des secrets.", releaseYear: 2010, genre: "Sci-Fi", director: "Christopher Nolan", rating: 8.8 },
     { title: "The Dark Knight", description: "Batman affronte le Joker, un criminel sans pitié.", releaseYear: 2008, genre: "Action", director: "Christopher Nolan", rating: 9.0 },
@@ -26,8 +19,14 @@ const DEMO_MOVIES = [
     { title: "Amélie", description: "Une jeune femme timide décide de changer la vie des gens autour d'elle.", releaseYear: 2001, genre: "Romance", director: "Jean-Pierre Jeunet", rating: 8.3 },
 ];
 
+const DEMO_ACCOUNTS = [
+    { name: "Alice Martin",  email: "alice@movietreasures.com",  password: "alice123" },
+    { name: "Bob Dupont",    email: "bob@movietreasures.com",    password: "bob123" },
+    { name: "Carol Schmidt", email: "carol@movietreasures.com",  password: "carol123" },
+    { name: "Admin",         email: "admin@movietreasures.com",  password: "admin123" },
+];
+
 async function seed() {
-    // créer les comptes de démo
     console.log("Seeding demo accounts...");
     for (const account of DEMO_ACCOUNTS) {
         const existing = await prisma.user.findUnique({ where: { email: account.email } });
@@ -40,7 +39,6 @@ async function seed() {
         }
     }
 
-    // créer les films de démo
     console.log("Seeding demo movies...");
     for (const movie of DEMO_MOVIES) {
         const existing = await prisma.movie.findFirst({ where: { title: movie.title } });
