@@ -1,7 +1,5 @@
-<<<<<<< HEAD
 import * as authService from "../services/authService.js";
 
-// connecter un utilisateur et retourner un token JWT
 const login = async (req, res, next) => {
     try {
         const { email, password } = req.body;
@@ -13,7 +11,6 @@ const login = async (req, res, next) => {
     }
 };
 
-// inscrire un nouvel utilisateur et retourner un token JWT
 const register = async (req, res, next) => {
     try {
         const { name, email, password } = req.body;
@@ -25,7 +22,6 @@ const register = async (req, res, next) => {
     }
 };
 
-// retourner les infos de l'utilisateur connecté (via son token)
 const me = async (req, res, next) => {
     try {
         const user = await authService.me(req.userId);
@@ -36,20 +32,3 @@ const me = async (req, res, next) => {
 };
 
 export { login, register, me };
-=======
-import * as authService from "../services/authService.js"
-
-const login = async (req, res, next) => {
-    try {
-        const {email, password} = req.body;
-        if (!email || !password) return res.status(400).json({message: "email and password are required"})
-        
-        const result = await authService.login({email, password})
-        res.json(result)
-    } catch(error)  {
-        next(error)
-    }
-}
-
-export {login}
->>>>>>> master
