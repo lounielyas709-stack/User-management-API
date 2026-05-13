@@ -29,14 +29,13 @@ const DEMO_ACCOUNTS = [
 async function seed() {
     console.log("Seeding demo accounts...");
     for (const account of DEMO_ACCOUNTS) {
-        const existing = await prisma.user.findUnique({ where: { email: account.email } });
-        if (!existing) {
-            const hashed = await bcrypt.hash(account.password, 10);
-            await prisma.user.create({ data: { name: account.name, email: account.email, password: hashed } });
-            console.log(`  Created: ${account.email}`);
-        } else {
-            console.log(`  Already exists: ${account.email}`);
-        }
+        const hashed = await bcrypt.hash(account.password, 10);
+        await prisma.user.upsert({
+            where: { email: account.email },
+            update: { password: hashed },
+            create: { name: account.name, email: account.email, password: hashed }
+        });
+        console.log(`  Upserted: ${account.email}`);
     }
 
     console.log("Seeding demo movies...");
