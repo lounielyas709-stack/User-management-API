@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+=======
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+>>>>>>> master
 generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
@@ -15,6 +23,7 @@ model user {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+<<<<<<< HEAD
 
 model movie {
   id          String   @id @default(uuid())
@@ -27,3 +36,5 @@ model movie {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
+=======
+>>>>>>> master

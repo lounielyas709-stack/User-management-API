@@ -1,4 +1,5 @@
 import { Router } from "express";
+<<<<<<< HEAD
 import * as authController from "../controllers/authController.js";
 import authenticate from "../middlewares/aunthenticate.js";
 
@@ -12,3 +13,12 @@ router.post("/register", authController.register);
 router.get("/me", authenticate, authController.me);
 
 export default router;
+=======
+import * as authController from "../controllers/authController.js"
+
+const router = Router()
+
+router.post("/login", authController.login);
+
+export default router; 
+>>>>>>> master

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // middleware global qui intercepte toutes les erreurs passées via next(error)
 const errorHandler = (err, req, res, next) => {
     console.error(err.stack);
@@ -16,3 +17,11 @@ const errorHandler = (err, req, res, next) => {
 };
 
 export default errorHandler;
+=======
+const errorHandler = (err, req, res, next) => {
+    console.error(err.stack);
+    res.status(err.statusCode || 500).json({message: err.message || "Internal Server Error"})
+}; 
+
+export default errorHandler
+>>>>>>> master

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import prisma from "../models/prisma.js";
 import { comparePasswords, hashPassword } from "../utils/password.js";
 import { generateToken } from "../utils/token.js";
@@ -6,18 +7,34 @@ import { generateToken } from "../utils/token.js";
 const login = async ({ email, password }) => {
     // chercher l'utilisateur par email
     const user = await prisma.user.findUnique({ where: { email } });
+=======
+import prisma from "../models/prisma.js"
+import { comparePasswords } from "../utils/password.js"
+import { generateToken } from "../utils/token.js"
+
+const login = async({email, password}) => {
+    const user = await prisma.user.findUnique({
+        where: {email}
+    })
+
+>>>>>>> master
     if (!user) {
         const error = new Error("Invalid email or password");
         error.statusCode = 401;
         throw error;
     }
+<<<<<<< HEAD
     // comparer le mot de passe envoyé avec le hash en base
+=======
+
+>>>>>>> master
     const isValid = await comparePasswords(password, user.password);
     if (!isValid) {
         const error = new Error("Invalid email or password");
         error.statusCode = 401;
         throw error;
     }
+<<<<<<< HEAD
     const token = generateToken(user.id);
     return { token, user: { id: user.id, name: user.name, email: user.email } };
 };
@@ -57,3 +74,20 @@ const me = async (userId) => {
 };
 
 export { login, register, me };
+=======
+
+    const token = generateToken(user.id);
+    return {
+        token,
+        user: {
+            id: user.id,
+            name: user.name,
+            email: user.email
+        }
+    };
+}
+
+
+export {login}
+
+>>>>>>> master
